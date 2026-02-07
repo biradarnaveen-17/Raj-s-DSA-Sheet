@@ -393,3 +393,40 @@ button{font-family:inherit}
   font-size:13px;
   line-height:1.55;
 }
+/* =========================
+   MOBILE RESPONSIVE (GLOBAL)
+   ========================= */
+@media (max-width: 720px){
+
+  /* Hide left sidebar on mobile */
+  .sidebar{
+    display:none !important;
+  }
+
+  /* Main container becomes full width */
+  .container{
+    display:block !important;
+  }
+
+  .main{
+    padding:14px !important;
+  }
+
+  /* Topbar becomes vertical */
+  .topbar{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:12px !important;
+  }
+
+  /* Make pills/buttons wrap properly */
+  .seg{
+    flex-wrap:wrap !important;
+    width:100%;
+  }
+
+  /* Avoid content hiding behind bottom nav (if used) */
+  body{
+    padding-bottom:90px;
+  }
+}
