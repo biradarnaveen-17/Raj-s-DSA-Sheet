@@ -8,6 +8,29 @@
   <link rel="stylesheet" href="app.css">
 
   <style>
+    /* =========================
+   MOBILE RESPONSIVE (SHEET)
+   ========================= */
+@media (max-width: 720px){
+
+  .controls{
+    width:100% !important;
+  }
+
+  .search{
+    width:100% !important;
+  }
+
+  .page{
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Table should scroll smoothly */
+  table{
+    min-width: 820px !important;
+  }
+}
+
     .page{
       display:grid;
       grid-template-columns: 1fr 360px;
