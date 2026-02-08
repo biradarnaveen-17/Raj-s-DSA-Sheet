@@ -38,11 +38,14 @@
       </div>
 
       <div class="grid">
+
+        <!-- ACCOUNT -->
         <div class="card">
           <div class="cardHead">
             <h2>Account</h2>
             <span class="badge">Security</span>
           </div>
+
           <div class="cardBody" style="display:grid; gap:10px">
             <div class="sub">
               If you want to change password, use Forgot Password from login page.
@@ -50,62 +53,71 @@
 
             <a class="btn" href="login.html">Go to Login</a>
             <button class="btn danger" id="logout2">Logout</button>
+
+            <div style="height:10px"></div>
+
+            <!-- ✅ DELETE ACCOUNT -->
+            <div style="border-top:1px solid var(--line); padding-top:12px; display:grid; gap:10px">
+              <div style="font-weight:900; letter-spacing:.2px">Danger Zone</div>
+
+              <div class="sub">
+                This will permanently delete your profile + progress data from this app.
+                (Your Supabase login may still exist.)
+              </div>
+
+              <button class="btn danger" id="deleteBtn">
+                🗑️ Delete My Account
+              </button>
+            </div>
+
           </div>
         </div>
 
+        <!-- ABOUT -->
         <div class="card">
-  <div class="cardHead">
-    <h2>About</h2>
-    <span class="badge">Raj’s DSA Sheet</span>
-  </div>
+          <div class="cardHead">
+            <h2>About</h2>
+            <span class="badge">Raj’s DSA Sheet</span>
+          </div>
 
-  <div class="cardBody">
-    <div class="sub">
-      Built with HTML, CSS, JavaScript and Supabase.
-      <br><br>
-      Features: Solved tracking, Notes, Revision ⭐, Search, Filters.
-    </div>
+          <div class="cardBody">
+            <div class="sub">
+              Built with HTML, CSS, JavaScript and Supabase.
+              <br><br>
+              Features: Solved tracking, Notes, Revision ⭐, Search, Filters.
+            </div>
 
-    <div style="height:14px"></div>
+            <div style="height:14px"></div>
 
-    <div style="display:grid; gap:10px">
-      <div style="font-weight:900; letter-spacing:.2px">Contact Developer</div>
+            <div style="display:grid; gap:10px">
+              <div style="font-weight:900; letter-spacing:.2px">Contact Developer</div>
 
-      <a class="btn" target="_blank" rel="noreferrer"
-         href="https://www.linkedin.com/in/naveen-r-biradar-a389a634a/">
-        🔗 LinkedIn
-      </a>
+              <a class="btn" target="_blank" rel="noreferrer"
+                href="https://www.linkedin.com/in/naveen-r-biradar-a389a634a/">
+                🔗 LinkedIn
+              </a>
 
-      <a class="btn" target="_blank" rel="noreferrer"
-         href="https://github.com/biradarnaveen-17">
-        💻 GitHub
-      </a>
+              <a class="btn" target="_blank" rel="noreferrer"
+                href="https://github.com/biradarnaveen-17">
+                💻 GitHub
+              </a>
 
-      <a class="btn" href="mailto:biradarnaveen17@gmail.com">
-        ✉️ Email
-      </a>
+              <a class="btn" href="mailto:biradarnaveen17@gmail.com">
+                ✉️ Email
+              </a>
 
-      <a class="btn" target="_blank" rel="noreferrer"
-         href="https://naveenbiradarportfolio.netlify.app/">
-        🌐 Portfolio
-      </a>
-    </div>
-  </div>
-</div>
+              <a class="btn" target="_blank" rel="noreferrer"
+                href="https://naveenbiradarportfolio.netlify.app/">
+                🌐 Portfolio
+              </a>
+            </div>
+          </div>
+        </div>
 
       </div>
-
     </main>
   </div>
 
-  <script type="module" src="settings.js"></script>
-  <!-- MOBILE BOTTOM NAV -->
-<div class="mnav">
-  <a href="home.html">🏠</a>
-  <a href="sheet.html">📄</a>
-  <a href="profile.html">👤</a>
-  <a href="settings.html">⚙️</a>
-</div>
-
+  <script type="module" src="./settings.js"></script>
 </body>
 </html>
