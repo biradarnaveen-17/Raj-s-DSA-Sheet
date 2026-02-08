@@ -58,6 +58,40 @@
       font-size:13px;
       line-height:1.45;
     }
+
+    .oauthWrap{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+    }
+
+    .oauthBtn{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      cursor:pointer;
+      font-size:13px;
+      font-weight:800;
+      transition:.18s ease;
+    }
+    .oauthBtn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.05);
+    }
+    .oauthBtn img{
+      width:18px;
+      height:18px;
+      object-fit:contain;
+    }
   </style>
 </head>
 <body>
@@ -80,8 +114,8 @@
 
       <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
         <span class="pill">✅ Supabase Auth</span>
-        <span class="pill">📩 Email verification</span>
-        <span class="pill">🔁 Long session</span>
+        <span class="pill">🔐 Google / GitHub</span>
+        <span class="pill">💾 Cloud Progress</span>
       </div>
     </div>
 
@@ -94,7 +128,7 @@
       <div class="form">
         <div id="nameWrap" style="display:none">
           <label>Full Name</label>
-          <input id="name" placeholder="Raj Kumar" />
+          <input id="name" placeholder="Your name" />
         </div>
 
         <div>
@@ -113,6 +147,23 @@
         </div>
 
         <div id="msg" class="msg"></div>
+
+        <!-- ✅ OAUTH BUTTONS -->
+        <div class="oauthWrap">
+          <div style="font-size:12px; color:var(--muted); font-weight:800">
+            Or continue with
+          </div>
+
+          <button class="oauthBtn" id="googleBtn">
+            <img src="https://www.google.com/favicon.ico" alt="g" />
+            Continue with Google
+          </button>
+
+          <button class="oauthBtn" id="githubBtn">
+            <img src="https://github.com/favicon.ico" alt="gh" />
+            Continue with GitHub
+          </button>
+        </div>
 
         <p class="sub" style="margin-top:10px">
           After login: <a href="home.html" style="color:var(--accent)">Home</a> •
@@ -136,6 +187,9 @@
     const mainBtn = document.getElementById("mainBtn");
     const forgotBtn = document.getElementById("forgotBtn");
     const msgEl = document.getElementById("msg");
+
+    const googleBtn = document.getElementById("googleBtn");
+    const githubBtn = document.getElementById("githubBtn");
 
     let mode = "login";
 
@@ -173,6 +227,24 @@
       window.location.href = "home.html";
     }
 
+    // ✅ OAuth Login (Google/GitHub)
+    async function oauth(provider){
+      showMsg("Opening " + provider + " login...", "");
+
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: window.location.origin + "/home.html"
+        }
+      });
+
+      if(error) return showMsg(error.message, "bad");
+    }
+
+    googleBtn.addEventListener("click", () => oauth("google"));
+    githubBtn.addEventListener("click", () => oauth("github"));
+
+    // Email + Password login/signup
     mainBtn.addEventListener("click", async () => {
       const email = emailEl.value.trim();
       const password = passEl.value;
@@ -201,8 +273,11 @@
           });
         }
 
-        showMsg("Account created! Verify your email link, then login.", "ok");
-      } else {
+        showMsg("Account created! Please verify email (if enabled), then login.", "ok");
+        setMode("login");
+      }
+
+      else{
         showMsg("Logging in...", "");
 
         const { error } = await supabase.auth.signInWithPassword({
@@ -212,11 +287,12 @@
 
         if(error) return showMsg(error.message, "bad");
 
-        showMsg("Login success! Redirecting...", "ok");
-        setTimeout(()=> window.location.href = "home.html", 500);
+        showMsg("Login successful. Redirecting...", "ok");
+        setTimeout(() => window.location.href = "home.html", 500);
       }
     });
 
+    // Forgot password
     forgotBtn.addEventListener("click", async () => {
       const email = emailEl.value.trim();
       if(!email) return showMsg("Enter your email first.", "bad");
@@ -224,14 +300,13 @@
       showMsg("Sending reset email...", "");
 
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "http://127.0.0.1:5500/reset.html"
+        redirectTo: window.location.origin + "/reset.html"
       });
 
       if(error) return showMsg(error.message, "bad");
 
-      showMsg("Reset email sent. Open your email → click link → set new password.", "ok");
+      showMsg("Password reset email sent. Check your inbox.", "ok");
     });
   </script>
-
 </body>
 </html>
